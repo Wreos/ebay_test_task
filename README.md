@@ -17,10 +17,10 @@ There is test-task solution. It includes checklist to test API for Sudoku Game
 
 ## SANITY TESTS
 
+- It should success on valid board (user won the game)
 - After  PUT `/board/validate` execution GET `/board/id` response is equal `/board/validate` request body
-- It should success on valid board
-- Validate board generation
 - If user loses, It should return coordinates (x,y) with problem 
+- Validate board generation
 
  **GET /board/ request**
  - There is a new (unique) board for every request execution 
@@ -37,6 +37,7 @@ There is a same id in response for every request execution with specific board i
   - No field filled
   - There is error "errors": [{"x":"y"} if two same digits in one row
   - There is error "errors": [{"x":"y"} if two same digits in one column
+  - There is error "errors": [{"x":"y"} if two same digits in one box
 
 ## REGRESSION TESTS
 
@@ -79,6 +80,7 @@ Request
 - If game is not completed user should see a link
 
 
+ - There is HTTP 415 Unsupported Media Type if request content-type format is in an unsupported format (multipart_encoded, graphql)
  - There is 405 (Method Not Allowed) error if POST request is sent 
  - There
    is 405 (Method Not Allowed) error if DELETE request is sent 
