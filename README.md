@@ -4,7 +4,7 @@ There is test-task solution. It includes checklist to test API for Sudoku Game
 
 # Checklist
 
-## SMOKE TESTS
+## SMOKE TESTS SUITE
 
  - GET /board/ is respond with 200 and contains valid json in response
    (valid json schema) 
@@ -15,7 +15,7 @@ There is test-task solution. It includes checklist to test API for Sudoku Game
    - PUT /board/validate should success
    (200) with valid board (valid json schema)
 
-## SANITY TESTS
+## SANITY TESTS SUITE
 
 - It should success on valid board (user won the game)
 - After  PUT `/board/validate` execution GET `/board/id` response is equal `/board/validate` request body
@@ -39,9 +39,11 @@ There is a same id in response for every request execution with specific board i
   - There is error "errors": [{"x":"y"} if two same digits in one column
   - There is error "errors": [{"x":"y"} if two same digits in one box
 
-## REGRESSION TESTS
+## REGRESSION TESTS SUITE 
 
 **PUT /board/validate request**
+- There is validation for PUT request paramaterers /board/validate/?fields=1,2 - error is displayed
+
 **`id` field validation**
 
  - There is `id` validation  - must not be null 
@@ -53,13 +55,14 @@ There is a same id in response for every request execution with specific board i
 
  - There is `field`
    validation  the whole field (`fields":null`) shouldn't not be null
- - There is  `field` validation  -   
-   negative index    
+ - There is  `field` validation  - negative index    
  - There is  `field` validation - value is  zero 
- - - There is  `field` validation  - field values could be only int or null  
+ - There is  `field` validation  - field values could be only int or null  
  - There is  `field` validation  - index above the possible top index  10
- -   There is  `field` validation  - field contains a two-dimensional array
+ -  \There is  `field` validation  - field contains a two-dimensional array
  - array values could be a null
+ - There is `field` validation `(400 error)` - out the range `int`  - 999999999999 
+ - There is `field` validation `(400 error)` - empty index
  
 **`state` field validation**
 
@@ -70,7 +73,9 @@ There is a same id in response for every request execution with specific board i
  - There is  `state` validation  - PUT /board/validate request - value is null
 
 **`dealsLink` field validation**
+
 Request
+
  -  Request is success if  `dealsLink` field is filled with any string value
  -  There is `dealsLink` validation  - int values should be casted as Strings
  -  There is no `dealsLink` validation  - could be null
@@ -78,19 +83,13 @@ Request
  Response
 - If game is completed user should see a link
 - If game is not completed user should see a link
-
+----------------------------------------------------------
+Global checks
 
  - There is HTTP 415 Unsupported Media Type if request content-type format is in an unsupported format (multipart_encoded, graphql)
  - There is 405 (Method Not Allowed) error if POST request is sent 
- - There
-   is 405 (Method Not Allowed) error if DELETE request is sent 
-  - There is
-   validation for wrong PUT request /board/validate/?fields=1,2 
- - There is
-   `field` validation `(400 error)`  - PUT /board/validate request - out
-   the range `int`  - 999999999999 
-  - There is  `field` validation `(400
-   error)`  - PUT /board/validate request - empty index
+ - There is 405 (Method Not Allowed) error if DELETE request is sent 
+
 
 ## SECURITY TESTS
 
