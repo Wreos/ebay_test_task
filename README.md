@@ -17,7 +17,10 @@ There is test-task solution. It includes checklist to test API for Sudoku Game
 
 ## SANITY TESTS
 
-After  PUT `/board/validate` execution GET `/board/id` response is equal `/board/validate` request body
+- After  PUT `/board/validate` execution GET `/board/id` response is equal `/board/validate` request body
+- It should success on valid board
+- Validate board generation
+- If user loses, It should return coordinates (x,y) with problem 
 
  **GET /board/ request**
  - There is a new (unique) board for every request execution 
@@ -60,7 +63,7 @@ There is a same id in response for every request execution with specific board i
 **`state` field validation**
 
  -  Request is success if  `state` field is filled with correct value  from ENUM - COMPLETED
- -  Request is success if  `state` field is filled    with correct value from ENUM - VALUE 
+ -  Request is success if  `state` field is filled    with correct value from ENUM - VALID
  - There is  `state` validation  - string value not from ENUM : "sdasdasdas"
  - There is  `state` validation - int value not from ENUM - 1 
  - There is  `state` validation  - PUT /board/validate request - value is null
